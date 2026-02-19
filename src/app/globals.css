@@ -1,26 +1,95 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
+@theme {
+  --font-sans: var(--font-outfit);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  /* pure black */
+  --card: #000000;
+  /* pure black */
+  --card-foreground: #fafafa;
+  --primary: #ffffff;
+  /* neutral-600 */
+  --primary-foreground: #000000;
+  --secondary: #000000;
+  /* pure black */
+  --secondary-foreground: #fafafa;
+  --muted: #000000;
+  /* pure black */
+  --muted-foreground: #a3a3a3;
+  /* neutral-500 */
+  --accent: #000000;
+  /* pure black */
+  --accent-foreground: #fafafa;
+  --border: #1a1a1a;
+  /* subtle dark gray */
+  --input: #1a1a1a;
+  --ring: #ffffff;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: #000000;
+  /* black */
+  --foreground: #ffffff;
+  /* white */
+  --card: #000000;
+  /* black */
+  --card-foreground: #ffffff;
+  /* white */
+  --primary: #ffffff;
+  /* white */
+  --primary-foreground: #000000;
+  /* black */
+  --secondary: #000000;
+  /* black */
+  --secondary-foreground: #ffffff;
+  /* white */
+  --muted: #000000;
+  /* black */
+  --muted-foreground: #d1d5db;
+  /* light gray */
+  --accent: #000000;
+  /* black */
+  --accent-foreground: #ffffff;
+  /* white */
+  --destructive: #ef4444;
+  /* red-500 */
+  --destructive-foreground: #ffffff;
+  /* white */
+  --border: #1a1a1a;
+  /* subtle dark gray */
+  --input: #1a1a1a;
+  /* subtle dark gray */
+  --ring: #3b82f6;
+  /* keep blue accent for ring only */
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
 }
