@@ -10,7 +10,7 @@ export const resume = {
             phone: "+919645228096",
             email: "sahalvv9656@gmail.com",
             linkedin: "https://linkedin.com/in/sahal-vv96/",
-            github: "https://github.com/sahal2255",
+            github: "https://github.com/sahalvv9656",
             socials: [
                 {
                     name: "Email",
@@ -24,7 +24,7 @@ export const resume = {
                 },
                 {
                     name: "GitHub",
-                    url: "https://github.com/sahal2255",
+                    url: "https://github.com/sahalvv9656",
                     icon: Github,
                 },
             ],
@@ -44,7 +44,7 @@ export const resume = {
             { name: "Ant Design", icon: "SiAntdesign", color: "#0170FE" },
             { name: "MUI", icon: "SiMui", color: "#007FFF" },
             { name: "Chart.js", icon: "SiChartdotjs", color: "#FF6384" },
-            { name: "GSAP", icon: "SiGsap", color: "#88CE02" },
+            { name: "Framer Motion", icon: "SiFramermotion", color: "#E11D48" },
         ],
         backend: [
             { name: "Node.js", icon: "SiNodedotjs", color: "#339933" },
@@ -123,7 +123,7 @@ export const resume = {
             title: "DryVitals.shop",
             tech: "Node.js, Express.js, MongoDB, HTML, CSS, Razorpay",
             date: "April 2024 – May 2024",
-            link: "https://github.com/sahal2255/DryVitals",
+            link: "https://github.com/sahalvv9656/DryVitals",
             description:
                 "Comprehensive e-commerce website streamlining shopping experience and administration.",
             points: [
@@ -138,7 +138,7 @@ export const resume = {
             title: "WeatherApp",
             tech: "React, OpenWeatherMap API",
             date: "June 2024 – June 2024",
-            link: "https://github.com/sahal2255/WeatherApp",
+            link: "https://github.com/sahalvv9656/WeatherApp",
             description:
                 "Weather forecasting application using React and OpenWeatherMap API.",
             points: [

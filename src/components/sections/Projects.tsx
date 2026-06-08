@@ -4,6 +4,39 @@ import { resume } from "@/data/resume";
 import { Github } from "lucide-react";
 import Link from "next/link";
 import * as SiIcons from "react-icons/si";
+import { motion } from "framer-motion";
+
+const headerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+        opacity: 1, 
+        y: 0,
+        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }
+    }
+};
+
+const projectCardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1] as const,
+            staggerChildren: 0.15,
+            delayChildren: 0.1
+        }
+    }
+};
+
+const cardChildVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }
+    }
+};
 
 export default function Projects() {
     // Flatten all skills for easy lookup
@@ -24,26 +57,36 @@ export default function Projects() {
     return (
         <section id="projects" className="py-24 px-4 relative">
             <div className="container max-w-5xl mx-auto">
-                <div className="text-center mb-16">
+                <motion.div 
+                    className="text-center mb-16"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                    variants={headerVariants}
+                >
                     <h2 className="text-3xl md:text-5xl font-bold text-foreground">
                         Selected Projects
                     </h2>
                     <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
                         A showcase of my recent work and technical contributions.
                     </p>
-                </div>
+                </motion.div>
 
                 <div className="flex flex-col gap-8">
                     {resume.projects.map((project, index) => (
-                        <div
+                        <motion.div
                             key={index}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: false, amount: 0.15 }}
+                            variants={projectCardVariants}
                             className="group relative bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 md:p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
                         >
                             {/* Inner Glow Effect */}
                             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-[inset_0_0_20px_rgba(255,255,255,0.02)] rounded-2xl" />
 
                             <div className="relative z-10 lg:flex gap-12 items-start">
-                                <div className="lg:w-1/3 mb-6 lg:mb-0">
+                                <motion.div variants={cardChildVariants} className="lg:w-1/3 mb-6 lg:mb-0">
                                     <h3 className="text-2xl md:text-3xl font-bold text-foreground group-hover:text-primary transition-colors mb-4">
                                         {project.title}
                                     </h3>
@@ -63,9 +106,9 @@ export default function Projects() {
                                             </Link>
                                         )}
                                     </div>
-                                </div>
+                                </motion.div>
 
-                                <div className="lg:w-2/3">
+                                <motion.div variants={cardChildVariants} className="lg:w-2/3">
                                     <p className="text-muted-foreground text-sm md:text-base mb-6 leading-relaxed">
                                         {project.description}
                                     </p>
@@ -115,9 +158,9 @@ export default function Projects() {
                                             );
                                         })}
                                     </div>
-                                </div>
+                                </motion.div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>

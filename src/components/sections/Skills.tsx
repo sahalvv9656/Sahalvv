@@ -2,6 +2,40 @@
 
 import { resume } from "@/data/resume";
 import * as SiIcons from "react-icons/si";
+import { motion } from "framer-motion";
+
+const headerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+        opacity: 1, 
+        y: 0,
+        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }
+    }
+};
+
+const categoryVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1] as const,
+            staggerChildren: 0.05,
+            delayChildren: 0.1
+        }
+    }
+};
+
+const skillItemVariants = {
+    hidden: { opacity: 0, scale: 0.85, y: 15 },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const }
+    }
+};
 
 export default function Skills() {
     const categories = [
@@ -19,19 +53,29 @@ export default function Skills() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
 
             <div className="container max-w-5xl mx-auto relative z-10">
-                <div className="text-center mb-16">
+                <motion.div 
+                    className="text-center mb-16"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                    variants={headerVariants}
+                >
                     <h2 className="text-3xl md:text-5xl font-bold text-foreground">
                         Technical Skills
                     </h2>
                     <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
                         A structured overview of my technical expertise and the tools I use.
                     </p>
-                </div>
+                </motion.div>
 
                 <div className="flex flex-col gap-8">
                     {categories.map((category) => (
-                        <div
+                        <motion.div
                             key={category.id}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: false, amount: 0.15 }}
+                            variants={categoryVariants}
                             className="group relative bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 md:p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
                         >
                             {/* Inner Glow Effect */}
@@ -47,8 +91,9 @@ export default function Skills() {
                                     const IconComponent = (SiIcons as any)[skill.icon];
 
                                     return (
-                                        <div
+                                        <motion.div
                                             key={skill.name}
+                                            variants={skillItemVariants}
                                             className="group/item relative flex flex-col items-center justify-center p-4 bg-white/[0.02] border border-white/[0.05] rounded-xl transition-all duration-300 hover:border-white/10 hover:-translate-y-1"
                                         >
                                             {/* Skill Glow */}
@@ -71,11 +116,11 @@ export default function Skills() {
                                             <span className="text-[10px] md:text-xs font-medium text-muted-foreground group-hover/item:text-foreground transition-colors text-center">
                                                 {skill.name}
                                             </span>
-                                        </div>
+                                        </motion.div>
                                     );
                                 })}
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>

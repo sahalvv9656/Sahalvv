@@ -1,42 +1,51 @@
 "use client";
 
-import { useRef } from "react";
 import { resume } from "@/data/resume";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 
-gsap.registerPlugin(ScrollTrigger);
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.2,
+            delayChildren: 0.1,
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { y: 40, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }
+    }
+};
 
 export default function About() {
-    const container = useRef(null);
-    const contentRef = useRef(null);
-
-    useGSAP(() => {
-        gsap.from(contentRef.current, {
-            scrollTrigger: {
-                trigger: contentRef.current,
-                start: "top 80%",
-                toggleActions: "play none none reverse",
-            },
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-        });
-    }, { scope: container });
-
     return (
-        <section id="about" ref={container} className="py-20 px-4">
+        <section id="about" className="py-20 px-4">
             <div className="container max-w-4xl mx-auto">
-                <div ref={contentRef}>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-foreground">
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                >
+                    <motion.h2 
+                        variants={itemVariants}
+                        className="text-3xl md:text-4xl font-bold mb-8 text-center text-foreground"
+                    >
                         About Me
-                    </h2>
-                    <div className="prose prose-invert prose-lg mx-auto text-muted-foreground leading-relaxed text-center max-w-2xl">
+                    </motion.h2>
+                    <motion.div 
+                        variants={itemVariants}
+                        className="prose prose-invert prose-lg mx-auto text-muted-foreground leading-relaxed text-center max-w-2xl"
+                    >
                         <p>{resume.personal.about}</p>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             </div>
         </section>
     );

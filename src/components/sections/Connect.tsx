@@ -1,45 +1,58 @@
 "use client";
 
-import { useRef } from "react";
 import { resume } from "@/data/resume";
 import { Mail, Linkedin, Github } from "lucide-react";
 import Link from "next/link";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 
-gsap.registerPlugin(ScrollTrigger);
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.15,
+            delayChildren: 0.1,
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { y: 30, opacity: 0, scale: 0.95 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }
+    }
+};
 
 export default function Connect() {
-    const container = useRef(null);
-    const contentRef = useRef(null);
-
-    useGSAP(() => {
-        gsap.from(contentRef.current, {
-            scrollTrigger: {
-                trigger: container.current,
-                start: "top 80%",
-                toggleActions: "play none none reverse",
-            },
-            scale: 0.95,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power3.out",
-        });
-    }, { scope: container });
-
     return (
-        <section id="connect" ref={container} className="py-20 px-4">
+        <section id="connect" className="py-20 px-4">
             <div className="container max-w-4xl mx-auto text-center">
-                <div ref={contentRef}>
-                    <h2 className="text-3xl md:text-5xl font-bold mb-6 text-foreground">
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                >
+                    <motion.h2 
+                        variants={itemVariants}
+                        className="text-3xl md:text-5xl font-bold mb-6 text-foreground"
+                    >
                         Let&apos;s Connect
-                    </h2>
-                    <p className="text-muted-foreground mb-12 max-w-xl mx-auto text-lg">
+                    </motion.h2>
+                    <motion.p 
+                        variants={itemVariants}
+                        className="text-muted-foreground mb-12 max-w-xl mx-auto text-lg"
+                    >
                         I&apos;m always open to discussing new projects, creative ideas or opportunities to be part of your visions.
-                    </p>
+                    </motion.p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
+                    <motion.div 
+                        variants={itemVariants}
+                        className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20"
+                    >
                         <Link
                             href={`mailto:${resume.personal.contact.email}`}
                             className="flex items-center gap-3 px-6 py-3 bg-white/[0.03] border border-white/[0.08] rounded-full hover:bg-white/[0.08] transition-all hover:scale-105"
@@ -63,12 +76,15 @@ export default function Connect() {
                             <Github className="w-5 h-5 text-foreground" />
                             <span className="text-foreground">GitHub</span>
                         </Link>
-                    </div>
+                    </motion.div>
 
-                    <footer className="pt-8 border-t border-white/[0.05] text-muted-foreground text-sm">
+                    <motion.footer 
+                        variants={itemVariants}
+                        className="pt-8 border-t border-white/[0.05] text-muted-foreground text-sm"
+                    >
                         <p>&copy; {new Date().getFullYear()} {resume.personal.name}. All rights reserved.</p>
-                    </footer>
-                </div>
+                    </motion.footer>
+                </motion.div>
             </div>
         </section>
     );
