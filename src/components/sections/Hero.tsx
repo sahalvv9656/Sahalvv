@@ -23,7 +23,7 @@ export default function Hero() {
                         viewport={{ once: false, amount: 0.2 }}
                         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-border shadow-2xl grayscale hover:grayscale-0 transition-all duration-500">
+                        <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-border shadow-2xl">
                             <Image
                                 src="/myimage.png"
                                 alt={resume.personal.name}
