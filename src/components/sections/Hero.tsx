@@ -1,55 +1,29 @@
 "use client";
 
-import { useRef } from "react";
 import { resume } from "@/data/resume";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion } from "framer-motion";
 
 export default function Hero() {
-    const container = useRef(null);
-    const imageRef = useRef(null);
-    const textRef = useRef(null);
-
-    useGSAP(() => {
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: container.current,
-                start: "top 80%",
-                toggleActions: "play none none reverse",
-            },
-        });
-
-        tl.from(imageRef.current, {
-            x: -50,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-        })
-            .from(textRef.current, {
-                x: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out",
-            }, "-=0.8");
-    }, { scope: container });
-
     return (
-        <section ref={container} className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4">
             <div className="absolute inset-0 -z-10 h-full w-full bg-background bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:24px_24px]" />
             <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]" />
 
             <div className="container max-w-6xl mx-auto z-10">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-12">
 
-                    <div ref={imageRef} className="w-full md:w-1/2 flex justify-center md:justify-start">
-                        <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-border shadow-2xl grayscale hover:grayscale-0 transition-all duration-500">
+                    <motion.div 
+                        className="w-full md:w-1/2 flex justify-center md:justify-start"
+                        initial={{ x: -50, opacity: 0 }}
+                        whileInView={{ x: 0, opacity: 1 }}
+                        viewport={{ once: false, amount: 0.2 }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-border shadow-2xl">
                             <Image
                                 src="/myimage.png"
                                 alt={resume.personal.name}
@@ -58,10 +32,16 @@ export default function Hero() {
                                 priority
                             />
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Text Section (Right) */}
-                    <div ref={textRef} className="w-full md:w-1/2 text-center md:text-left">
+                    <motion.div 
+                        className="w-full md:w-1/2 text-center md:text-left"
+                        initial={{ x: 50, opacity: 0 }}
+                        whileInView={{ x: 0, opacity: 1 }}
+                        viewport={{ once: false, amount: 0.2 }}
+                        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    >
                         <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm text-xs font-semibold text-primary">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -117,7 +97,7 @@ export default function Hero() {
                                 Get in Touch
                             </Link>
                         </div>
-                    </div>
+                    </motion.div>
 
                 </div>
             </div>
