@@ -78,7 +78,7 @@ export const resume = {
         {
             company: "Storepecker",
             role: "Jr Frontend Engineer",
-            duration: "Oct 2025 – Present",
+            duration: "Oct 2025 – Jun 2026",
             location: "Kochi, Kerala",
             description: [
                 "Contributed to the development and refinement of multiple product themes and interactive dashboards, ensuring consistency, scalability, and a modern user experience.",

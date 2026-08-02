@@ -43,10 +43,6 @@ export default function Hero() {
                         transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm text-xs font-semibold text-primary">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                            </span>
                             Available for new opportunities
                         </div>
 
